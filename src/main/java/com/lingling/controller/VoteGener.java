@@ -1,6 +1,4 @@
 package com.lingling.controller;
-import com.lingling.domin.test.UserDao;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,14 +16,11 @@ import java.io.Serializable;
 @RestController
 @ComponentScan(value="com.linglin")
 public class VoteGener extends BaseController{
-    @Autowired
-    private  RedisTemplate redisTemplate;
+
     @RequestMapping(value = "voteGener/getVoteGenerByPage", method = {RequestMethod.POST, RequestMethod.GET })
     public @ResponseBody String getVoteGenerByPage() {
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         operations.set("qq", "wanghao");
-
         return (String)operations.get("qq");
-
     }
 }

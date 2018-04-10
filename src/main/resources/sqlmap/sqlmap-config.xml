@@ -12,7 +12,10 @@
     </settings>
 
     <mappers>
-        <mapper resource="sqlmap/user/userMapper.xml"/>
+        <!--<mapper resource="sqlmap/user/userMapper.xml"/>-->
+        <mapper resource="sqlmap/user/UserMapper.xml"/>
+        <mapper resource="sqlmap/votecount/VoteCountMapper.xml"/>
+        <mapper resource="sqlmap/votediv/VoteDivMapper.xml"/>
     </mappers>
 
 </configuration>
