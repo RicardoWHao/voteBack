@@ -1,7 +1,6 @@
-package com.lingling.controller;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.lingling.controller.votediv;
+import com.lingling.controller.base.BaseController;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +14,8 @@ import java.io.Serializable;
  */
 @RestController
 @ComponentScan(value="com.linglin")
-public class VoteGener extends BaseController{
+public class VoteGener extends BaseController {
+
 
     @RequestMapping(value = "voteGener/getVoteGenerByPage", method = {RequestMethod.POST, RequestMethod.GET })
     public @ResponseBody String getVoteGenerByPage() {

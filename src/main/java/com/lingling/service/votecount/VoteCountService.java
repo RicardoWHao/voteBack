@@ -15,4 +15,11 @@ public interface VoteCountService {
     List<com.lingling.domin.votecount.VoteCount> selectAll();
 
     int updateByPrimaryKey(com.lingling.domin.votecount.VoteCount record);
+
+    List getUserByVoteId(String voteId);
+
+    List getVoteResultByUserId(String userId);
+
+    List getVoteResult(String voteTopicId);
+
 }

@@ -2,6 +2,7 @@ package com.lingling.dao.user.impl;
 
 import com.lingling.dao.user.UserDao;
 import com.lingling.domin.user.User;
+import com.lingling.domin.votecount.VoteCount;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 
@@ -18,26 +19,31 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int deleteByPrimaryKey(String id) {
-        return sqlSessionTemplate.delete("UserDao.delete", id);
+        return sqlSessionTemplate.delete("UserMapper.delete", id);
     }
 
     @Override
     public int insert(User record) {
-       return sqlSessionTemplate.insert("UserDao.insert", record);
+       return sqlSessionTemplate.insert("UserMapper.insert", record);
     }
 
     @Override
     public User selectByPrimaryKey(String id) {
-        return sqlSessionTemplate.selectOne("UserDao.selectByPrimaryKey", id);
+        return sqlSessionTemplate.selectOne("UserMapper.selectByPrimaryKey", id);
     }
 
     @Override
     public List<User> selectAll() {
-        return sqlSessionTemplate.selectList("UserDao.selectAll");
+        return sqlSessionTemplate.selectList("UserMapper.selectAll");
     }
 
     @Override
     public int updateByPrimaryKey(User record) {
-        return sqlSessionTemplate.update("UserDao.updateByPrimaryKey",record);
+        return sqlSessionTemplate.update("UserMapper.updateByPrimaryKey",record);
+    }
+
+    @Override
+    public List getUserList(List<VoteCount> list) {
+        return sqlSessionTemplate.selectList("UserMapper.getUserList",list);
     }
 }

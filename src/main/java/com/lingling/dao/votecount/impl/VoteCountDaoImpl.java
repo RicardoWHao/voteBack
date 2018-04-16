@@ -3,6 +3,7 @@ package com.lingling.dao.votecount.impl;
 import com.lingling.dao.votecount.VoteCountDao;
 import com.lingling.domin.votecount.VoteCount;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by wanghao on 2018/4/10.
  *
  */
+@Repository
 public class VoteCountDaoImpl implements VoteCountDao{
     @Resource(name="sqlSessionTemplate")
     private SqlSessionTemplate sqlSessionTemplate;
@@ -39,4 +41,21 @@ public class VoteCountDaoImpl implements VoteCountDao{
     public int updateByPrimaryKey(VoteCount record) {
         return sqlSessionTemplate.update("VoteCountMapper.updateByPrimaryKey",record);
     }
+
+    @Override
+    public List getUserIDByVoteId(String voteId) {
+        return sqlSessionTemplate.selectList("VoteCountMapper.getUserByVoteId",voteId);
+    }
+
+    @Override
+    public List getVoteResult(List voteDivList) {
+        return sqlSessionTemplate.selectList("VoteCountMapper.getVoteResult",voteDivList);
+    }
+
+    @Override
+    public List getVoteResultByUserId(String userId) {
+        return null;
+    }
+
+
 }

@@ -43,4 +43,13 @@
     select id, user_code, user_nickname, user_realname, sex, phone, password, picture
     from user
   </select>
+  <select id="getUserList" parameterType="java.util.List" resultMap="BaseResultMap">
+    select * from user
+    <where>
+      <foreach collection="list" open=" and id in(" close=")"
+               item="voteCount" separator=",">
+        #{voteCount.voteUserId}
+      </foreach>
+    </where>
+  </select>
 </mapper>

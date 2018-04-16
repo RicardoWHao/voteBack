@@ -7,6 +7,10 @@
     <result column="vote_user_id" property="voteUserId" jdbcType="VARCHAR" />
     <result column="vote_topic_id" property="voteTopicId" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="VoteResultMap" type="com.lingling.domin.votecount.VoteResult">
+    <result column="count(*)" property="count" jdbcType="VARCHAR"/>
+    <result column="item_id" property="voteItemId" jdbcType="VARCHAR"/>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from vote_count
     where id = #{id,jdbcType=VARCHAR}
@@ -32,5 +36,21 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, item_id, vote_user_id, vote_topic_id
     from vote_count
+  </select>
+  <select id="getUserByVoteId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, item_id, vote_user_id, vote_topic_id
+    from vote_count
+    where item_id = #{voteId,jdbcType=VARCHAR}
+  </select>
+  <select id="getVoteResult" resultMap="VoteResultMap" parameterType="java.util.List" >
+    select item_id, count(*)
+    from vote_count
+    <where>
+      <foreach collection="list" open=" and item_id in(" close=")"
+               item="voteDiv" separator=",">
+        #{voteDiv.id}
+      </foreach>
+    </where>
+    GROUP BY item_id
   </select>
 </mapper>

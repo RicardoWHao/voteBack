@@ -17,4 +17,6 @@ public interface VoteDivService {
     List<VoteDiv> selectAll();
 
     int updateByPrimaryKey(VoteDiv record);
+
+    List<VoteDiv> getVoteItemByIds(List voteResultList);
 }

@@ -37,4 +37,14 @@
     select id, vate_topic_id, vate_item_name, user_id, production_pic, vate_item_decrib
     from vote_div
   </select>
+  <select id="getVoteItemByIds" resultMap="BaseResultMap" parameterType="java.util.List" >
+    select *
+    from vote_div
+    <where>
+      <foreach collection="list" open=" and id in(" close=")"
+               item="voteResult" separator=",">
+        #{voteResult.voteItemId}
+      </foreach>
+    </where>
+  </select>
 </mapper>
