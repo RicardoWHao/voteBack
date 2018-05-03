@@ -15,7 +15,7 @@ public interface UserService {
 
     int insert(User record);
 
-    Result selectByPrimaryKey(String id, HttpSession httpSession);
+    Result selectByPrimaryKey(HttpSession httpSession);
 
     User selectByPrimaryKey(String id);
 
@@ -25,7 +25,9 @@ public interface UserService {
 
     List getUserList(List<VoteCount> list);
 
-    Result login(User record);
+    Result login(User record,HttpSession httpSession);
 
-    Result updatePsw(String id,String newPsw,String oldPsw);
+    List<User> selectUsersByQuery(User userQuery);
+
+    Result updatePsw(String newPsw,String oldPsw,HttpSession httpSession);
 }

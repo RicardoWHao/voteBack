@@ -17,4 +17,6 @@ public interface UserDao {
     int updateByPrimaryKey(User record);
 
     List getUserList(List<VoteCount> list);
+
+    List<User> selectUsersByQuery(User userQuery);
 }

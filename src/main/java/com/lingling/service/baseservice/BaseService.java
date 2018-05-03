@@ -5,5 +5,6 @@ package com.lingling.service.baseservice;
  */
 
 public class BaseService {
-   //public SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,1);
+
+    //public SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,1);
 }

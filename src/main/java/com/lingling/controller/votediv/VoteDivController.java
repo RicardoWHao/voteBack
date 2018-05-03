@@ -3,8 +3,8 @@ package com.lingling.controller.votediv;
 import com.lingling.controller.base.BaseController;
 import com.lingling.domin.votediv.VoteDiv;
 import com.lingling.service.votediv.VoteDivService;
-import com.lingling.utils.IdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -23,11 +23,12 @@ public class VoteDivController extends BaseController{
 
         return voteDivService.insert(record);
     }
-
+    @RequestMapping("votediv/selectById")
     public VoteDiv selectByPrimaryKey(String id){
         return voteDivService.selectByPrimaryKey(id);
     }
 
+    @RequestMapping("votediv/selectAll")
     public List<VoteDiv> selectAll(){
         return voteDivService.selectAll();
     }

@@ -3,11 +3,11 @@ package com.lingling.controller.votecount;
 import com.lingling.controller.base.BaseController;
 import com.lingling.domin.votecount.VoteCount;
 import com.lingling.service.votecount.VoteCountService;
-import com.lingling.utils.IdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -22,8 +22,10 @@ public class VoteCountController extends BaseController{
         return voteCountService.deleteByPrimaryKey(id);
     }
 
-    public int insert(VoteCount record){
-
+    //投票
+    @RequestMapping("voteCount/insert")
+    public int insert(VoteCount record,HttpSession httpSession){
+        record.setId((String)httpSession.getAttribute("userId"));
         return voteCountService.insert(record);
     }
 

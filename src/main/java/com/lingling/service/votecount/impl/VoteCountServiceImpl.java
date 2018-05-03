@@ -54,7 +54,7 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
     public List getVoteResult(String voteTopicId) {
         List<VoteDiv> voteDivList = voteDivService.selectAll();
         List<VoteResult> voteResultList = voteCountDao.getVoteResult(voteDivList);
-        HashMap<String,VoteDiv> map = new HashMap();
+        HashMap<String,VoteDiv> map = new HashMap<String,VoteDiv>();
         for (VoteDiv voteDiv:voteDivList) {
             map.put(voteDiv.getId(),voteDiv);
         }

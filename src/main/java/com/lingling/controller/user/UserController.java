@@ -4,12 +4,9 @@ import com.lingling.controller.base.BaseController;
 import com.lingling.domin.user.User;
 import com.lingling.service.user.UserService;
 import com.lingling.utils.EmailHelper;
-import com.lingling.utils.IdGenerator;
 import com.lingling.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,13 +50,25 @@ public class UserController extends BaseController{
     //登录
     @RequestMapping("user/login")
     public Result login(User record, HttpSession httpSession){
-        httpSession.setAttribute("userId", record.getId());
-        return userService.login(record);
+        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+        return userService.login(record,httpSession);
+    }
+    //注销
+    @RequestMapping("user/Cancellation")
+    public Result Cancellation(HttpSession httpSession){
+        Result result = new Result(false);
+        try {
+            httpSession.removeAttribute("userId");
+        }catch (Exception e){
+
+        }
+        result.setSuccess(true);
+        return result;
     }
     //查询用户登录信息
     @RequestMapping("user/selectByPrimaryKey")
-    public Result selectByPrimaryKey(String id,HttpSession httpSession){
-        return userService.selectByPrimaryKey(id,httpSession);
+    public Result selectByPrimaryKey(HttpSession httpSession){
+        return userService.selectByPrimaryKey(httpSession);
     }
 
     public List<User> selectAll(){
@@ -67,20 +76,16 @@ public class UserController extends BaseController{
     }
     //更新用户密码
     @RequestMapping("user/updatePsw")
-    public Result updatePsw(String id,String newPsw,String oldPsw){
-        return userService.updatePsw(id,newPsw,oldPsw);
+    public Result updatePsw(String newPsw,String oldPsw,HttpSession httpSession){
+        return userService.updatePsw(newPsw,oldPsw,httpSession);
     }
 
     public int updateByPrimaryKey(User record,HttpSession httpSession){
         Result result = new Result(false);
-        if (record.getId()!=null){
-            result.setSuccess(true);
-        }
-        if (record.getId()==null && httpSession.getId()==null){
+        if (httpSession.getAttribute("userId")==null){
             result.setErrorMessage("请先登录！");
-        }
-        if (record.getId()==null && httpSession.getId()!=null){
-            record.setId(httpSession.getId());
+        }else{
+            record.setId((String)httpSession.getAttribute("userId"));
         }
         return userService.updateByPrimaryKey(record);
     }

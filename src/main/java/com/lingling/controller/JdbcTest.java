@@ -8,9 +8,9 @@ import java.sql.*;
 public class JdbcTest {
     public static Connection getConnection(){
         String driver="com.mysql.jdbc.Driver";  //获取mysql数据库的驱动类
-        String url="jdbc:mysql://127.0.0.1:3306/mytest"; //连接数据库（kucun是数据库名）
+        String url="jdbc:mysql://127.0.0.1:3306/vote"; //连接数据库（kucun是数据库名）
         String name="root";//连接mysql的用户名
-        String pwd="";//连接mysql的密码
+        String pwd="123456";//连接mysql的密码
         try{
             Class.forName(driver);
             Connection conn=DriverManager.getConnection(url,name,pwd);//获取连接对象
@@ -52,7 +52,7 @@ public class JdbcTest {
         if(!cc.isClosed())
             System.out.println("Succeeded connecting to the Database!");
         Statement statement = cc.createStatement();
-        String sql = "select * from t_user";
+        String sql = "select * from user";
         ResultSet rs = statement.executeQuery(sql);
         while(rs.next()) {
             System.out.println(rs.getString("id")+"");

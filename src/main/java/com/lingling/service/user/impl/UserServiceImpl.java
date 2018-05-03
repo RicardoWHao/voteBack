@@ -18,6 +18,7 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends BaseService implements UserService{
+
     @Autowired
     private UserDao userDao;
 
@@ -32,17 +33,15 @@ public class UserServiceImpl extends BaseService implements UserService{
         return userDao.insert(record);
     }
 
+
     @Override
-    public Result selectByPrimaryKey(String id, HttpSession httpSession) {
+    public Result selectByPrimaryKey(HttpSession httpSession) {
         Result result = new Result(false);
-        if (id!=null){
-            result.setSuccess(true);
-            result.addDefaultModel(userDao.selectByPrimaryKey(id));
-        }
-        if (id==null && httpSession.getId()==null){
+        String id;
+        if (httpSession.getId()==null){
             result.setErrorMessage("请先登录！");
         }
-        if (id==null && httpSession.getId()!=null){
+        if (httpSession.getId()!=null){
             id = (String) httpSession.getAttribute("userId");
             result.addDefaultModel(userDao.selectByPrimaryKey(id));
         }
@@ -69,11 +68,14 @@ public class UserServiceImpl extends BaseService implements UserService{
     }
 
     @Override
-    public Result login(User record) {
+    public Result login(User record,HttpSession httpSession) {
         Result result = new Result(false);
-        User user = selectByPrimaryKey(record.getId());
-        if (record.getPassword()==user.getPassword()){
+        User userQuery = new User();
+        userQuery.setPhone(record.getPhone());
+        List<User> userList = selectUsersByQuery(userQuery);
+        if (record.getPassword()==userList.get(0).getPassword()){
             result.setSuccess(true);
+            httpSession.setAttribute("userId", record.getPhone());
             result.setSuccessMessage("登录成功");
         }else {
             result.setErrorMessage("密码错误");
@@ -82,8 +84,20 @@ public class UserServiceImpl extends BaseService implements UserService{
     }
 
     @Override
-    public Result updatePsw(String id, String newPsw, String oldPsw) {
+    public List<User> selectUsersByQuery(User userQuery){
+        List<User> list = null;
+        list = userDao.selectUsersByQuery(userQuery);
+        return list;
+    }
+    @Override
+    public Result updatePsw(String newPsw, String oldPsw , HttpSession httpSession) {
+
+        String id = (String)httpSession.getAttribute("id");
         Result result = new Result(false);
+        if (id == null){
+            result.setErrorMessage("请先登录！");
+            return  result;
+        }
         User user = this.selectByPrimaryKey(id);
         if (user.getPassword()==oldPsw){
             user.setPassword(newPsw);

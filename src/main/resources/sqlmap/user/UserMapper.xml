@@ -11,6 +11,35 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="picture" property="picture" jdbcType="VARCHAR" />
   </resultMap>
+  <!-- 查询条件 -->
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id}
+      </if>
+      <if test="userCode != null and userCode != ''" >
+        and user_code = #{userCode}
+      </if>
+      <if test="userNickname != null and userNickname != ''" >
+        and user_nickname = #{userNickname}
+      </if>
+      <if test="userRealname != null and userRealname != ''" >
+        and user_realname = #{userRealname}
+      </if>
+      <if test="sex != null and sex != ''" >
+        and sex = #{sex}
+      </if>
+      <if test="phone != null and phone != ''" >
+        and phone = #{phone}
+      </if>
+      <if test="password != null and password != ''" >
+        and password = #{password}
+      </if>
+      <if test="picture != null and picture != ''" >
+        and picture = #{picture}
+      </if>
+    </where>
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
     where id = #{id,jdbcType=VARCHAR}
@@ -51,5 +80,9 @@
         #{voteCount.voteUserId}
       </foreach>
     </where>
+  </select>
+  <select id="selectUsersByQuery" parameterType="java.util.List" resultMap="BaseResultMap">
+    select * from user
+    <include refid="condition" />
   </select>
 </mapper>
