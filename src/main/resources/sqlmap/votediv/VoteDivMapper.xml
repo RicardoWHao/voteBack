@@ -3,38 +3,41 @@
 <mapper namespace="VoteDivMapper" >
   <resultMap id="BaseResultMap" type="com.lingling.domin.votediv.VoteDiv" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="vate_topic_id" property="vateTopicId" jdbcType="VARCHAR" />
-    <result column="vate_item_name" property="vateItemName" jdbcType="VARCHAR" />
+    <result column="vote_topic_id" property="voteTopicId" jdbcType="VARCHAR" />
+    <result column="vote_item_name" property="voteItemName" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="production_pic" property="productionPic" jdbcType="VARCHAR" />
-    <result column="vate_item_decrib" property="vateItemDecrib" jdbcType="VARCHAR" />
+    <result column="vote_item_decrib" property="voteItemDecrib" jdbcType="VARCHAR" />
+    <result column="vote_count" property="voteCount" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from vote_div
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.lingling.domin.votediv.VoteDiv" >
-    insert into vote_div (id, vate_topic_id, vate_item_name, 
-      user_id, production_pic,vate_item_decrib)
-    values (#{id,jdbcType=VARCHAR}, #{vateTopicId,jdbcType=VARCHAR}, #{vateItemName,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{productionPic,jdbcType=VARCHAR},#{vateItemDecrib,jdbcType=VARCHAR})
+    insert into vote_div (id, vote_topic_id, vote_item_name,
+      user_id, production_pic,vote_item_decrib,vote_count)
+    values (#{id,jdbcType=VARCHAR}, #{voteTopicId,jdbcType=VARCHAR}, #{voteItemName,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{productionPic,jdbcType=VARCHAR},#{voteItemDecrib,jdbcType=VARCHAR},
+      #{voteCount,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.lingling.domin.votediv.VoteDiv" >
     update vote_div
-    set vate_topic_id = #{vateTopicId,jdbcType=VARCHAR},
-      vate_item_name = #{vateItemName,jdbcType=VARCHAR},
+    set vote_topic_id = #{voteTopicId,jdbcType=VARCHAR},
+      vote_item_name = #{voteItemName,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
       production_pic = #{productionPic,jdbcType=VARCHAR},
-      vate_item_decrib = #{vateItemDecrib,jdbcType=VARCHAR}
+      vote_item_decrib = #{voteItemDecrib,jdbcType=VARCHAR},
+      vote_count = #{voteCount,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, vate_topic_id, vate_item_name, user_id, production_pic, vate_item_decrib
+    select id, vote_topic_id, vote_item_name, user_id, production_pic, vote_item_decrib ,vote_count
     from vote_div
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, vate_topic_id, vate_item_name, user_id, production_pic, vate_item_decrib
+    select id, vote_topic_id, vote_item_name, user_id, production_pic, vote_item_decrib
     from vote_div
   </select>
   <select id="getVoteItemByIds" resultMap="BaseResultMap" parameterType="java.util.List" >

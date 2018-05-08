@@ -5,9 +5,11 @@ import com.lingling.domin.votediv.VoteDiv;
 import com.lingling.service.baseservice.BaseService;
 import com.lingling.service.votediv.VoteDivService;
 import com.lingling.utils.IdGenerator;
+import com.lingling.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -24,9 +26,18 @@ public class VoteDivServiceImpl extends BaseService implements VoteDivService{
     }
 
     @Override
-    public int insert(VoteDiv record) {
+    public Result insert(VoteDiv record,HttpSession httpSession) {
+        Result result = new Result(false);
         record.setId(IdGenerator.getId());
-        return voteDivDao.insert(record);
+        record.setVoteCount(0);
+        if (httpSession.getAttribute("userId")==null){
+            result.setErrorMessage("请先登录");
+            return result;
+        }
+        record.setUserId((String)httpSession.getAttribute("userId"));
+        voteDivDao.insert(record);
+        result.setSuccess(true);
+        return result;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.lingling.service.votediv;
 
 import com.lingling.domin.votediv.VoteDiv;
+import com.lingling.utils.Result;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -10,7 +12,7 @@ import java.util.List;
 public interface VoteDivService {
     int deleteByPrimaryKey(String id);
 
-    int insert(VoteDiv record);
+    Result insert(VoteDiv record,HttpSession httpSession);
 
     VoteDiv selectByPrimaryKey(String id);
 

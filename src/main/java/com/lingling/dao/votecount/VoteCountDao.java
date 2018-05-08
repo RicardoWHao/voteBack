@@ -11,7 +11,7 @@ public interface VoteCountDao {
 
     VoteCount selectByPrimaryKey(String id);
 
-    List<VoteCount> selectAll();
+    List<VoteCount> selectAll(VoteCount voteCount);
 
     int updateByPrimaryKey(VoteCount record);
 
@@ -19,6 +19,6 @@ public interface VoteCountDao {
 
     List getVoteResult(List voteDivList);
 
-    List getVoteResultByUserId(String userId);
+
 
 }

@@ -18,5 +18,7 @@ public interface UserDao {
 
     List getUserList(List<VoteCount> list);
 
+    List getUserByIds(List<String> list);
+
     List<User> selectUsersByQuery(User userQuery);
 }

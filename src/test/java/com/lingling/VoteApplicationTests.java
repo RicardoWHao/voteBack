@@ -2,17 +2,17 @@ package com.lingling;
 
 import com.lingling.controller.user.UserController;
 import com.lingling.dao.user.UserDao;
-import com.lingling.domin.user.User;
-import com.lingling.domin.votecount.VoteCount;
 import com.lingling.service.user.UserService;
 import com.lingling.service.votecount.VoteCountService;
-import com.lingling.utils.EmailHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.Serializable;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -26,14 +26,18 @@ public class VoteApplicationTests {
 	private UserController userController;
 	@Autowired
 	private VoteCountService voteCountService;
+	@Autowired
+	public RedisTemplate redisTemplate;
 	@Test
 	public void test(){
 		List list = voteCountService.getUserByVoteId("1");
+		ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+		operations.set("a","aa");
+		System.out.println(operations.get("a"));
 	}
 	@Test
 	public  void  tsetemail(){
 		String content ="哈喽你好！";
-		List list = voteCountService.getVoteResultByUserId("1");
 		String content1 ="哈喽你好！";
 	}
 	@Test

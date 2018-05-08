@@ -2,6 +2,7 @@ package com.lingling.controller.votecount;
 
 import com.lingling.controller.base.BaseController;
 import com.lingling.domin.votecount.VoteCount;
+import com.lingling.domin.votediv.VoteDivDTO;
 import com.lingling.service.votecount.VoteCountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +34,8 @@ public class VoteCountController extends BaseController{
         return voteCountService.selectByPrimaryKey(id);
     }
 
-    public List<VoteCount> selectAll(){
-        return voteCountService.selectAll();
+    public List<VoteCount> selectAll(VoteCount voteCount){
+        return voteCountService.selectAll(voteCount);
     }
 
     public int updateByPrimaryKey(VoteCount record){
@@ -51,5 +52,11 @@ public class VoteCountController extends BaseController{
     @RequestMapping("voteCount/getVoteResult")
     public List getVoteResult(String voteTopicId){
         return voteCountService.getVoteResult(voteTopicId);
+    }
+
+    //查看我的投票
+    @RequestMapping("voteCount/getMyVote")
+    public List<VoteDivDTO> getMyVote(String voteTopicId,HttpSession httpSession){
+        return voteCountService.getMyVote(voteTopicId, httpSession);
     }
 }

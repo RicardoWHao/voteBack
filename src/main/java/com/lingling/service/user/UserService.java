@@ -25,6 +25,8 @@ public interface UserService {
 
     List getUserList(List<VoteCount> list);
 
+    List getUserByIds(List<String> list);
+
     Result login(User record,HttpSession httpSession);
 
     List<User> selectUsersByQuery(User userQuery);

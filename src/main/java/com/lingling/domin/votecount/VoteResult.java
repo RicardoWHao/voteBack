@@ -6,16 +6,16 @@ package com.lingling.domin.votecount;
 public class VoteResult {
     private String count;
     private String voteItemId;
-    private String vateItemName;
+    private String voteItemName;
     private String userId;
-    private String vateItemDecrib;
+    private String voteItemDecrib;
 
-    public String getVateItemName() {
-        return vateItemName;
+    public String getVoteItemName() {
+        return voteItemName;
     }
 
-    public void setVateItemName(String vateItemName) {
-        this.vateItemName = vateItemName;
+    public void setVoteItemName(String voteItemName) {
+        this.voteItemName = voteItemName;
     }
 
     public String getUserId() {
@@ -27,12 +27,12 @@ public class VoteResult {
     }
 
 
-    public String getVateItemDecrib() {
-        return vateItemDecrib;
+    public String getVoteItemDecrib() {
+        return voteItemDecrib;
     }
 
-    public void setVateItemDecrib(String vateItemDecrib) {
-        this.vateItemDecrib = vateItemDecrib;
+    public void setVoteItemDecrib(String voteItemDecrib) {
+        this.voteItemDecrib = voteItemDecrib;
     }
 
     public String getCount() {

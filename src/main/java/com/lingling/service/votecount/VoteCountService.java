@@ -1,5 +1,9 @@
 package com.lingling.service.votecount;
 
+import com.lingling.domin.votecount.VoteCount;
+import com.lingling.domin.votediv.VoteDivDTO;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -8,18 +12,17 @@ import java.util.List;
 public interface VoteCountService {
     int deleteByPrimaryKey(String id);
 
-    int insert(com.lingling.domin.votecount.VoteCount record);
+    int insert(VoteCount record);
 
-    com.lingling.domin.votecount.VoteCount selectByPrimaryKey(String id);
+    VoteCount selectByPrimaryKey(String id);
 
-    List<com.lingling.domin.votecount.VoteCount> selectAll();
+    List<VoteCount> selectAll(VoteCount voteCount);
 
-    int updateByPrimaryKey(com.lingling.domin.votecount.VoteCount record);
+    int updateByPrimaryKey(VoteCount record);
 
     List getUserByVoteId(String voteId);
 
-    List getVoteResultByUserId(String userId);
-
     List getVoteResult(String voteTopicId);
 
+    List<VoteDivDTO> getMyVote(String voteTopicId, HttpSession httpSession);
 }

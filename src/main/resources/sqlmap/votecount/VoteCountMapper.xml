@@ -11,6 +11,23 @@
     <result column="count(*)" property="count" jdbcType="VARCHAR"/>
     <result column="item_id" property="voteItemId" jdbcType="VARCHAR"/>
   </resultMap>
+  <!-- 查询条件 -->
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id}
+      </if>
+      <if test="itemId != null and itemId != ''" >
+        and item_id = #{itemId}
+      </if>
+      <if test="voteUserId != null and voteUserId != ''" >
+        and vote_user_id = #{voteUserId}
+      </if>
+      <if test="voteTopicId != null and voteTopicId != ''" >
+        and vote_topic_id = #{voteTopicId}
+      </if>
+    </where>
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from vote_count
     where id = #{id,jdbcType=VARCHAR}
@@ -33,9 +50,10 @@
     from vote_count
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="selectAll" parameterType="java.util.List" resultMap="BaseResultMap" >
     select id, item_id, vote_user_id, vote_topic_id
     from vote_count
+    <include refid="condition" />
   </select>
   <select id="getUserByVoteId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select id, item_id, vote_user_id, vote_topic_id

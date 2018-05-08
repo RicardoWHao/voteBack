@@ -48,6 +48,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List getUserByIds(List<String> list) {
+        return sqlSessionTemplate.selectList("UserMapper.getUserByIds",list);
+    }
+
+    @Override
     public List<User> selectUsersByQuery(User userQuery) {
         return sqlSessionTemplate.selectList("UserMapper.selectUsersByQuery",userQuery);
     }

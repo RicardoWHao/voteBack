@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -37,9 +38,10 @@ public class UserController extends BaseController{
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         Result result = new Result();
         result.setSuccess(false);
-        if (verificationCode==(String)operations.get(record.getPhone())){
+        if (verificationCode==operations.get(record.getUserCode()).toString()){
             result.setErrorMessage("验证码错误！");
         }else {
+            userService.insert(record);
             result.setSuccess(true);
             result.addDefaultModel(record);
             result.setSuccessMessage("新增成功！");
@@ -50,7 +52,6 @@ public class UserController extends BaseController{
     //登录
     @RequestMapping("user/login")
     public Result login(User record, HttpSession httpSession){
-        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         return userService.login(record,httpSession);
     }
     //注销
@@ -91,12 +92,13 @@ public class UserController extends BaseController{
     }
     //发送验证码
     @RequestMapping("user/sendVerificationCode")
-    public void sendVerificationCode(String email){
-        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+    public void sendVerificationCode(String userCode){
+        ValueOperations<String, Integer> operations = redisTemplate.opsForValue();
         int random=new Random().nextInt(9000)+1000;//为变量赋随机值1000-9999;
         try {
-            EmailHelper.sendEmail("您的验证码为"+ random,email);
-            operations.set(email, random);
+            EmailHelper.sendEmail("您的验证码为"+ random,userCode);
+            operations.set(userCode, random);
+            logger.log(Level.INFO,userCode+":"+((Integer)operations.get(userCode)).toString());
         } catch (Exception e) {
             e.printStackTrace();
             logger.warning(e.getMessage());

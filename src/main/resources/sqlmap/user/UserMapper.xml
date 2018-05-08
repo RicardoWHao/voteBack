@@ -81,7 +81,16 @@
       </foreach>
     </where>
   </select>
-  <select id="selectUsersByQuery" parameterType="java.util.List" resultMap="BaseResultMap">
+  <select id="getUserByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select * from user
+    <where>
+      <foreach collection="list" open=" and id in(" close=")"
+               item="item" separator=",">
+        #{item}
+      </foreach>
+    </where>
+  </select>
+  <select id="selectUsersByQuery" parameterType="com.lingling.domin.user.User" resultMap="BaseResultMap">
     select * from user
     <include refid="condition" />
   </select>

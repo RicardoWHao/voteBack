@@ -33,7 +33,7 @@ public class VoteCountDaoImpl implements VoteCountDao{
     }
 
     @Override
-    public List<VoteCount> selectAll() {
+    public List<VoteCount> selectAll(VoteCount voteCount) {
         return sqlSessionTemplate.selectList("VoteCountMapper.selectAll");
     }
 
@@ -52,10 +52,6 @@ public class VoteCountDaoImpl implements VoteCountDao{
         return sqlSessionTemplate.selectList("VoteCountMapper.getVoteResult",voteDivList);
     }
 
-    @Override
-    public List getVoteResultByUserId(String userId) {
-        return null;
-    }
 
 
 }

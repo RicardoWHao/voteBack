@@ -3,15 +3,25 @@ package com.lingling.domin.votediv;
 public class VoteDiv {
     private String id;
 
-    private String vateTopicId;
+    private String voteTopicId;
 
-    private String vateItemName;
+    private String voteItemName;
 
     private String userId;
 
     private String productionPic;
 
-    private String vateItemDecrib;
+    private String voteItemDecrib;
+
+    private Integer voteCount;
+
+    public Integer getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(Integer voteCount) {
+        this.voteCount = voteCount;
+    }
 
     public String getId() {
         return id;
@@ -21,33 +31,35 @@ public class VoteDiv {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getVateTopicId() {
-        return vateTopicId;
+    public String getVoteTopicId() {
+        return voteTopicId;
     }
 
-    public void setVateTopicId(String vateTopicId) {
-        this.vateTopicId = vateTopicId == null ? null : vateTopicId.trim();
+    public void setVoteTopicId(String voteTopicId) {
+        this.voteTopicId = voteTopicId;
     }
 
-    public String getVateItemName() {
-        return vateItemName;
+    public String getVoteItemName() {
+        return voteItemName;
     }
 
-    public void setVateItemName(String vateItemName) {
-        this.vateItemName = vateItemName == null ? null : vateItemName.trim();
+    public void setVoteItemName(String voteItemName) {
+        this.voteItemName = voteItemName;
+    }
+
+    public String getVoteItemDecrib() {
+        return voteItemDecrib;
+    }
+
+    public void setVoteItemDecrib(String voteItemDecrib) {
+        this.voteItemDecrib = voteItemDecrib;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public String getVateItemDecrib() {
-        return vateItemDecrib;
-    }
 
-    public void setVateItemDecrib(String vateItemDecrib) {
-        this.vateItemDecrib = vateItemDecrib;
-    }
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();

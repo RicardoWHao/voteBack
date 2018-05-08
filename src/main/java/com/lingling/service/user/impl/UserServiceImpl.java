@@ -68,14 +68,20 @@ public class UserServiceImpl extends BaseService implements UserService{
     }
 
     @Override
+    public List getUserByIds(List<String> list) {
+        return userDao.getUserByIds(list);
+    }
+
+    @Override
     public Result login(User record,HttpSession httpSession) {
         Result result = new Result(false);
         User userQuery = new User();
-        userQuery.setPhone(record.getPhone());
+        //userQuery.setPhone(record.getPhone());
+        userQuery.setUserCode(record.getUserCode());
         List<User> userList = selectUsersByQuery(userQuery);
-        if (record.getPassword()==userList.get(0).getPassword()){
+        if (record.getPassword().equals(userList.get(0).getPassword())){
             result.setSuccess(true);
-            httpSession.setAttribute("userId", record.getPhone());
+            httpSession.setAttribute("userId", userList.get(0).getId());
             result.setSuccessMessage("登录成功");
         }else {
             result.setErrorMessage("密码错误");
