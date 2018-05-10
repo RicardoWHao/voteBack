@@ -26,7 +26,7 @@ public class VoteCountController extends BaseController{
     //投票
     @RequestMapping("voteCount/insert")
     public int insert(VoteCount record,HttpSession httpSession){
-        record.setId((String)httpSession.getAttribute("userId"));
+        record.setVoteUserId((String)httpSession.getAttribute("userId"));
         return voteCountService.insert(record);
     }
 

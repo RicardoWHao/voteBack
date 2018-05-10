@@ -38,10 +38,10 @@ public class UserServiceImpl extends BaseService implements UserService{
     public Result selectByPrimaryKey(HttpSession httpSession) {
         Result result = new Result(false);
         String id;
-        if (httpSession.getId()==null){
+        if (httpSession.getAttribute("userId")==null){
             result.setErrorMessage("请先登录！");
         }
-        if (httpSession.getId()!=null){
+        if (httpSession.getAttribute("userId")!=null){
             id = (String) httpSession.getAttribute("userId");
             result.addDefaultModel(userDao.selectByPrimaryKey(id));
         }
@@ -98,14 +98,14 @@ public class UserServiceImpl extends BaseService implements UserService{
     @Override
     public Result updatePsw(String newPsw, String oldPsw , HttpSession httpSession) {
 
-        String id = (String)httpSession.getAttribute("id");
+        String id = (String)httpSession.getAttribute("userId");
         Result result = new Result(false);
         if (id == null){
             result.setErrorMessage("请先登录！");
             return  result;
         }
         User user = this.selectByPrimaryKey(id);
-        if (user.getPassword()==oldPsw){
+        if (user.getPassword().equals(oldPsw)){
             user.setPassword(newPsw);
             this.updateByPrimaryKey(user);
             result.setSuccess(true);

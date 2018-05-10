@@ -37,7 +37,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, vote_topic_id, vote_item_name, user_id, production_pic, vote_item_decrib
+    select id, vote_topic_id, vote_item_name, user_id, production_pic, vote_item_decrib, vote_count
     from vote_div
   </select>
   <select id="getVoteItemByIds" resultMap="BaseResultMap" parameterType="java.util.List" >
