@@ -39,13 +39,12 @@ public class UserController extends BaseController{
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         Result result = new Result();
         result.setSuccess(false);
+        Assert.notNull(verificationCode,"验证码不能为空！");
+        Assert.notNull(operations.get(record.getUserCode().toString()),"验证码已过期，请重新输入！");
         logger.info(record.toString());
-        System.out.println(record.toString());
         logger.info("输入验证码："+verificationCode);
-        System.out.println("输入验证码："+verificationCode);
-        logger.info("服务器验证码："+operations.get(record.getUserCode()).toString());
-        System.out.println("服务器验证码："+operations.get(record.getUserCode()).toString());
-        if (verificationCode==operations.get(record.getUserCode()).toString()){
+        logger.info("服务器验证码："+operations.get(record.getUserCode().toString()));
+        if (!verificationCode.equals(operations.get(record.getUserCode()).toString())){
             result.setErrorMessage("验证码错误！");
         }else {
             userService.insert(record);
