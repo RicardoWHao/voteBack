@@ -39,7 +39,6 @@ public class UserController extends BaseController{
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         Result result = new Result();
         result.setSuccess(false);
-        Assert.notNull(verificationCode, "验证码不能为空");
         logger.info(record.toString());
         System.out.println(record.toString());
         logger.info("输入验证码："+verificationCode);
