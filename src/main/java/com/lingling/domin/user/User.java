@@ -80,4 +80,18 @@ public class User {
     public void setPicture(String picture) {
         this.picture = picture == null ? null : picture.trim();
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", userCode='" + userCode + '\'' +
+                ", userNickname='" + userNickname + '\'' +
+                ", userRealname='" + userRealname + '\'' +
+                ", sex=" + sex +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", picture='" + picture + '\'' +
+                '}';
+    }
 }

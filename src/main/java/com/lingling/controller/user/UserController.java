@@ -40,6 +40,12 @@ public class UserController extends BaseController{
         Result result = new Result();
         result.setSuccess(false);
         Assert.notNull(verificationCode, "验证码不能为空");
+        logger.info(record.toString());
+        System.out.println(record.toString());
+        logger.info("输入验证码："+verificationCode);
+        System.out.println("输入验证码："+verificationCode);
+        logger.info("服务器验证码："+operations.get(record.getUserCode()).toString());
+        System.out.println("服务器验证码："+operations.get(record.getUserCode()).toString());
         if (verificationCode==operations.get(record.getUserCode()).toString()){
             result.setErrorMessage("验证码错误！");
         }else {
