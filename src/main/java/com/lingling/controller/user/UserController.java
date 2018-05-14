@@ -7,6 +7,7 @@ import com.lingling.utils.EmailHelper;
 import com.lingling.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,7 @@ public class UserController extends BaseController{
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         Result result = new Result();
         result.setSuccess(false);
+        Assert.notNull(verificationCode, "验证码不能为空");
         if (verificationCode==operations.get(record.getUserCode()).toString()){
             result.setErrorMessage("验证码错误！");
         }else {
