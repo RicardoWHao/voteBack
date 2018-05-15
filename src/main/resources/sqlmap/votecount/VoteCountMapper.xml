@@ -50,7 +50,7 @@
     from vote_count
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" parameterType="java.util.List" resultMap="BaseResultMap" >
+  <select id="selectAll" parameterType="com.lingling.domin.votecount.VoteCount" resultMap="BaseResultMap" >
     select id, item_id, vote_user_id, vote_topic_id
     from vote_count
     <include refid="condition" />

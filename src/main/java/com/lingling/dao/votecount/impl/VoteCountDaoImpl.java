@@ -34,7 +34,7 @@ public class VoteCountDaoImpl implements VoteCountDao{
 
     @Override
     public List<VoteCount> selectAll(VoteCount voteCount) {
-        return sqlSessionTemplate.selectList("VoteCountMapper.selectAll");
+        return sqlSessionTemplate.selectList("VoteCountMapper.selectAll",voteCount);
     }
 
     @Override

@@ -71,9 +71,11 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
     public List<VoteDivDTO> getMyVote(String voteTopicId, HttpSession httpSession) {
         VoteCount voteCount = new VoteCount();
         voteCount.setVoteUserId((String) httpSession.getAttribute("userId"));
+        //查出来所有投过的票
         List<VoteCount> voteCountList = voteCountDao.selectAll(voteCount);
         List<VoteResult> voteResultList = new ArrayList<>();
         List<String> userList = new ArrayList<>();
+        //查出投过的票的人都是谁
         for(VoteCount voteCountItem : voteCountList){
             VoteResult voteResult = new VoteResult();
             voteResult.setVoteItemId(voteCountItem.getItemId());
@@ -82,6 +84,7 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
         }
         List<VoteDiv> voteDivList = voteDivService.getVoteItemByIds(voteResultList);
         List<User> users = userService.getUserByIds(userList);
+
         Map<String , User> map = new HashMap<>();
         for(User user : users){
             map.put(user.getId(),user);
@@ -90,7 +93,9 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
         for(VoteDiv voteDiv : voteDivList){
             VoteDivDTO voteDivDTO = new VoteDivDTO();
             BeanUtils.copyProperties(voteDiv,voteDivDTO);
-            voteDivDTO.setUserName(map.get(voteDiv.getUserId()).getUserNickname());
+            if(map.get(voteDiv.getUserId())!=null) {
+                voteDivDTO.setUserName(map.get(voteDiv.getUserId()).getUserCode());
+            }
             voteDivDTOList.add(voteDivDTO);
         }
         return voteDivDTOList;
