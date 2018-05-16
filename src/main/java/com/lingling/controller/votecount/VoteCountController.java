@@ -33,7 +33,6 @@ public class VoteCountController extends BaseController{
     public VoteCount selectByPrimaryKey(String id){
         return voteCountService.selectByPrimaryKey(id);
     }
-
     public List<VoteCount> selectAll(VoteCount voteCount){
         return voteCountService.selectAll(voteCount);
     }

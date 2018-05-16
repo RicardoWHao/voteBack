@@ -45,8 +45,8 @@
     from vote_div
     <where>
       <foreach collection="list" open=" and id in(" close=")"
-               item="voteResult" separator=",">
-        #{voteResult.voteItemId}
+               item="voteItemId" separator=",">
+        #{voteItemId}
       </foreach>
     </where>
   </select>

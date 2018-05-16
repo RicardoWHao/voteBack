@@ -56,7 +56,7 @@ public class VoteDivServiceImpl extends BaseService implements VoteDivService{
     }
 
     @Override
-    public List<VoteDiv> getVoteItemByIds(List voteResultList) {
-        return voteDivDao.getVoteItemByIds(voteResultList);
+    public List<VoteDiv> getVoteItemByIds(List ids) {
+        return voteDivDao.getVoteItemByIds(ids);
     }
 }

@@ -43,7 +43,7 @@ public class VoteDivDaoImpl implements VoteDivDao{
     }
 
     @Override
-    public List<VoteDiv> getVoteItemByIds(List voteResultList) {
-        return sqlSessionTemplate.selectList("VoteDivMapper.getVoteItemByIds",voteResultList);
+    public List<VoteDiv> getVoteItemByIds(List ids) {
+        return sqlSessionTemplate.selectList("VoteDivMapper.getVoteItemByIds",ids);
     }
 }

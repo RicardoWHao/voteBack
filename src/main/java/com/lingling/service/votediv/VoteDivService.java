@@ -20,5 +20,5 @@ public interface VoteDivService {
 
     int updateByPrimaryKey(VoteDiv record);
 
-    List<VoteDiv> getVoteItemByIds(List voteResultList);
+    List<VoteDiv> getVoteItemByIds(List ids);
 }
