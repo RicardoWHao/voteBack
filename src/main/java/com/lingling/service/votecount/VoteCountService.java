@@ -1,7 +1,7 @@
 package com.lingling.service.votecount;
 
 import com.lingling.domin.votecount.VoteCount;
-import com.lingling.domin.votediv.VoteDivDTO;
+import com.lingling.utils.Result;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -24,5 +24,5 @@ public interface VoteCountService {
 
     List getVoteResult(String voteTopicId);
 
-    List<VoteDivDTO> getMyVote(String voteTopicId, HttpSession httpSession);
+    Result getMyVote(String voteTopicId, HttpSession httpSession);
 }

@@ -4,6 +4,7 @@ import com.lingling.controller.base.BaseController;
 import com.lingling.domin.votecount.VoteCount;
 import com.lingling.domin.votediv.VoteDivDTO;
 import com.lingling.service.votecount.VoteCountService;
+import com.lingling.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,7 +56,7 @@ public class VoteCountController extends BaseController{
 
     //查看我的投票
     @RequestMapping("voteCount/getMyVote")
-    public List<VoteDivDTO> getMyVote(String voteTopicId,HttpSession httpSession){
+    public Result getMyVote(String voteTopicId, HttpSession httpSession){
         return voteCountService.getMyVote(voteTopicId, httpSession);
     }
 }

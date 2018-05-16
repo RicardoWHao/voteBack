@@ -11,6 +11,7 @@ import com.lingling.service.user.UserService;
 import com.lingling.service.votecount.VoteCountService;
 import com.lingling.service.votediv.VoteDivService;
 import com.lingling.utils.IdGenerator;
+import com.lingling.utils.Result;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,21 +69,24 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
     }
 
     @Override
-    public List<VoteDivDTO> getMyVote(String voteTopicId, HttpSession httpSession) {
+    public Result getMyVote(String voteTopicId, HttpSession httpSession) {
+        Result result = new Result(false);
         VoteCount voteCount = new VoteCount();
         voteCount.setVoteUserId((String) httpSession.getAttribute("userId"));
         //查出来所有投过的票
         List<VoteCount> voteCountList = voteCountDao.selectAll(voteCount);
-        List<VoteResult> voteResultList = new ArrayList<>();
+        if (voteCountList.size()==0){
+            result.setErrorMessage("请先投票");
+            return result;
+        }
+        List<String> voteIds = new ArrayList<>();
         List<String> userList = new ArrayList<>();
         //查出投过的票的人都是谁
         for(VoteCount voteCountItem : voteCountList){
-            VoteResult voteResult = new VoteResult();
-            voteResult.setVoteItemId(voteCountItem.getItemId());
-            voteResultList.add(voteResult);
+            voteIds.add(voteCountItem.getItemId());
             userList.add(voteCountItem.getVoteUserId());
         }
-        List<VoteDiv> voteDivList = voteDivService.getVoteItemByIds(voteResultList);
+        List<VoteDiv> voteDivList = voteDivService.getVoteItemByIds(voteIds);
         List<User> users = userService.getUserByIds(userList);
 
         Map<String , User> map = new HashMap<>();
@@ -98,7 +102,8 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
             }
             voteDivDTOList.add(voteDivDTO);
         }
-        return voteDivDTOList;
+        result.addDefaultModel(voteDivDTOList);
+        return result;
     }
 
     /*
