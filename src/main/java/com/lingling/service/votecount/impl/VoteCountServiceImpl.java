@@ -102,6 +102,7 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
             }
             voteDivDTOList.add(voteDivDTO);
         }
+        result.setSuccess(true);
         result.addDefaultModel(voteDivDTOList);
         return result;
     }
