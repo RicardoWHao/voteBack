@@ -37,6 +37,11 @@ public class VoteDivController extends BaseController{
         return voteDivService.selectAll();
     }
 
+    @RequestMapping("votediv/selectVoteDivByQuery")
+    public Result selectVoteDivByQuery(VoteDiv voteDivQuery){
+        return voteDivService.selectVoteDivByQuery(voteDivQuery);
+    }
+
     public int updateByPrimaryKey(VoteDiv record){
         return voteDivService.updateByPrimaryKey(record);
     }

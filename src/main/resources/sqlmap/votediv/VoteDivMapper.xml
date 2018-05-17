@@ -10,6 +10,31 @@
     <result column="vote_item_decrib" property="voteItemDecrib" jdbcType="VARCHAR" />
     <result column="vote_count" property="voteCount" jdbcType="INTEGER" />
   </resultMap>
+  <sql id="condition">
+    <where>
+      <if test="id != null and id != ''" >
+        and id = #{id}
+      </if>
+      <if test="voteTopicId != null and voteTopicId != ''" >
+        and vote_topic_id = #{voteTopicId}
+      </if>
+      <if test="voteItemName != null and voteItemName != ''" >
+        and vote_item_name like"%"#{voteItemName}"%"
+      </if>
+      <if test="userId != null and userId != ''" >
+        and user_id = #{userId}
+      </if>
+      <if test="productionPic != null and productionPic != ''" >
+        and production_pic = #{productionPic}
+      </if>
+      <if test="voteItemDecrib != null and voteItemDecrib != ''" >
+        and vote_item_decrib = #{voteItemDecrib}
+      </if>
+      <if test="voteCount != null and voteCount != ''" >
+        and vote_count = #{voteCount}
+      </if>
+    </where>
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from vote_div
     where id = #{id,jdbcType=VARCHAR}
@@ -49,5 +74,10 @@
         #{voteItemId}
       </foreach>
     </where>
+  </select>
+  <select id="selectVoteDivByQuery" resultMap="BaseResultMap" parameterType="com.lingling.domin.votediv.VoteDiv" >
+    select *
+    from vote_div
+    <include refid="condition" />
   </select>
 </mapper>

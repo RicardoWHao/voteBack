@@ -21,4 +21,6 @@ public interface VoteDivService {
     int updateByPrimaryKey(VoteDiv record);
 
     List<VoteDiv> getVoteItemByIds(List ids);
+
+    Result selectVoteDivByQuery(VoteDiv voteDivQuery);
 }

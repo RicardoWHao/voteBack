@@ -46,4 +46,9 @@ public class VoteDivDaoImpl implements VoteDivDao{
     public List<VoteDiv> getVoteItemByIds(List ids) {
         return sqlSessionTemplate.selectList("VoteDivMapper.getVoteItemByIds",ids);
     }
+
+    @Override
+    public List<VoteDiv> selectVoteDivByQuery(VoteDiv voteDivQuery) {
+        return sqlSessionTemplate.selectList("VoteDivMapper.selectVoteDivByQuery",voteDivQuery);
+    }
 }

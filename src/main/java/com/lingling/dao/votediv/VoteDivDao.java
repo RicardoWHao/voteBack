@@ -15,4 +15,6 @@ public interface VoteDivDao {
     int updateByPrimaryKey(VoteDiv record);
 
     List<VoteDiv> getVoteItemByIds(List ids);
+
+    List<VoteDiv> selectVoteDivByQuery(VoteDiv voteDivQuery);
 }
