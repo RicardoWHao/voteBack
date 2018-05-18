@@ -31,12 +31,12 @@ public class VoteDivController extends BaseController{
     public VoteDiv selectByPrimaryKey(String id){
         return voteDivService.selectByPrimaryKey(id);
     }
-
+    //根据id查询参赛作品明细
     @RequestMapping("votediv/selectAll")
     public List<VoteDiv> selectAll(){
         return voteDivService.selectAll();
     }
-
+    //搜索
     @RequestMapping("votediv/selectVoteDivByQuery")
     public Result selectVoteDivByQuery(VoteDiv voteDivQuery){
         return voteDivService.selectVoteDivByQuery(voteDivQuery);
