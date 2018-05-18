@@ -20,17 +20,18 @@ public class UploadFileController {
 
         String contentType = file.getContentType();
         //String fileName = file.getOriginalFilename();
-        String fileName = IdGenerator.getId()+file.getOriginalFilename();
+        String fileName = file.getOriginalFilename();
         /*System.out.println("fileName-->" + fileName);
         System.out.println("getContentType-->" + contentType);*/
-        String filePath = httpSession.getServletContext().getRealPath("imgupload/");
+        String forderId =IdGenerator.getId();
+        String filePath = httpSession.getServletContext().getRealPath("imgupload/"+forderId+"/");
         try {
             FileUtils.uploadFile(file.getBytes(), filePath, fileName);
         } catch (Exception e) {
             // TODO: handle exception
         }
         //返回json
-        return fileName;
+        return forderId+"/"+fileName;
     }
 
 
