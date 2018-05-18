@@ -6,6 +6,7 @@ import com.lingling.domin.user.User;
 import com.lingling.service.user.UserService;
 import com.lingling.utils.EmailHelper;
 import com.lingling.utils.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
  * Created by Administrator on 2018/4/11.
  */
 @RestController
+@Slf4j
 public class UserController extends BaseController{
     @Autowired
     UserService userService;
@@ -89,12 +91,12 @@ public class UserController extends BaseController{
     }
     //注销
     @RequestMapping("user/Cancellation")
-    public Result Cancellation(HttpSession httpSession){
+    public Result cancellation(HttpSession httpSession){
         Result result = new Result(false);
         try {
             httpSession.removeAttribute("userId");
         }catch (Exception e){
-
+            log.error(e.getMessage());
         }
         result.setSuccess(true);
         return result;
