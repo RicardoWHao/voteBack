@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -119,7 +118,7 @@ public class UserController extends BaseController{
     //更新用户密码
     @RequestMapping("user/updatePswByVerificationCode")
     public Result updatePswByVerificationCode(String newPsw,String verificationCode,String userCode){
-        Result result = null;
+        Result result = new Result(false);
         try {
             result = userService.updatePswByVerificationCode(newPsw,verificationCode,userCode);
         }catch (BizException bizException){

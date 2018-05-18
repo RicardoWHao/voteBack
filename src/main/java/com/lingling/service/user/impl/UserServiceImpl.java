@@ -140,7 +140,7 @@ public class UserServiceImpl extends BaseService implements UserService{
         User userQuery = new User();
         userQuery.setUserCode(userCode);
         List<User> userList = this.selectUsersByQuery(userQuery);
-        this.checkVerificationCode(userList.get(0).getId(),verificationCode);
+        this.checkVerificationCode(userList.get(0).getUserCode(),verificationCode);
         userList.get(0).setPassword(newPsw);
         this.updateByPrimaryKey(userList.get(0));
         result.setSuccess(true);
@@ -154,10 +154,11 @@ public class UserServiceImpl extends BaseService implements UserService{
         Result result = new Result();
         result.setSuccess(false);
         log.info("输入验证码："+verificationCode);
+
         log.info("服务器验证码："+operations.get(key));
-        if(verificationCode == null && verificationCode.equals("")){
+        if(verificationCode == null || verificationCode.equals("")){
             throw new BizException("验证码不能为空");
-        }else if(!verificationCode.equals(operations.get(key))){
+        }else if(!verificationCode.equals(operations.get(key).toString())){
             throw new BizException("验证码错误");
         }
     }
