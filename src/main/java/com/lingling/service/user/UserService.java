@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserService {
     int deleteByPrimaryKey(String id);
 
-    int insert(User record);
+    Result insert(User record,String verificationCode);
 
     Result selectByPrimaryKey(HttpSession httpSession);
 
@@ -32,4 +32,7 @@ public interface UserService {
     List<User> selectUsersByQuery(User userQuery);
 
     Result updatePsw(String newPsw,String oldPsw,HttpSession httpSession);
+    /*忘记密码，根据邮箱验证码更改密码*/
+    Result updatePswByVerificationCode(String newPsw,String verificationCode,String userCode);
+
 }

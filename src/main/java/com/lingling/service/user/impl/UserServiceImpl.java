@@ -1,5 +1,6 @@
 package com.lingling.service.user.impl;
 
+import com.lingling.common.BizException;
 import com.lingling.dao.user.UserDao;
 import com.lingling.domin.user.User;
 import com.lingling.domin.votecount.VoteCount;
@@ -7,16 +8,20 @@ import com.lingling.service.baseservice.BaseService;
 import com.lingling.service.user.UserService;
 import com.lingling.utils.IdGenerator;
 import com.lingling.utils.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/10.
  */
 @Service
+@Slf4j
 public class UserServiceImpl extends BaseService implements UserService{
 
     @Autowired
@@ -28,9 +33,21 @@ public class UserServiceImpl extends BaseService implements UserService{
     }
 
     @Override
-    public int insert(User record) {
+    public Result insert(User record,String verificationCode) {
+        Result result = new Result(false);
+        //判断是否存在相同用户
+        User userquery = new User();
+        userquery.setUserCode(record.getUserCode());
+        if(this.selectUsersByQuery(userquery).size()!=0){
+            result.setErrorMessage("邮箱已存在！");
+            return result;
+        }
+        this.checkVerificationCode(record.getUserCode(),verificationCode);
         record.setId(IdGenerator.getId());
-        return userDao.insert(record);
+        userDao.insert(record);
+        result.setSuccess(true);
+        result.setSuccessMessage("新增成功");
+        return result;
     }
 
 
@@ -89,6 +106,8 @@ public class UserServiceImpl extends BaseService implements UserService{
         return result;
     }
 
+
+
     @Override
     public List<User> selectUsersByQuery(User userQuery){
         List<User> list = null;
@@ -113,6 +132,33 @@ public class UserServiceImpl extends BaseService implements UserService{
             result.setErrorMessage("密码错误！");
         }
         return result;
+    }
 
+    @Override
+    public Result updatePswByVerificationCode(String newPsw, String verificationCode,String userCode) {
+        Result result = new Result(false);
+        User userQuery = new User();
+        userQuery.setUserCode(userCode);
+        List<User> userList = this.selectUsersByQuery(userQuery);
+        this.checkVerificationCode(userList.get(0).getId(),verificationCode);
+        userList.get(0).setPassword(newPsw);
+        this.updateByPrimaryKey(userList.get(0));
+        result.setSuccess(true);
+        result.setSuccessMessage("更新成功");
+        return result;
+    }
+
+    /*校验验证码*/
+    private void checkVerificationCode(String key,String verificationCode){
+        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+        Result result = new Result();
+        result.setSuccess(false);
+        log.info("输入验证码："+verificationCode);
+        log.info("服务器验证码："+operations.get(key));
+        if(verificationCode == null && verificationCode.equals("")){
+            throw new BizException("验证码不能为空");
+        }else if(!verificationCode.equals(operations.get(key))){
+            throw new BizException("验证码错误");
+        }
     }
 }

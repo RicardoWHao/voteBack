@@ -1,5 +1,6 @@
 package com.lingling.service.votecount.impl;
 
+import com.lingling.common.BizException;
 import com.lingling.dao.votecount.VoteCountDao;
 import com.lingling.domin.user.User;
 import com.lingling.domin.votecount.VoteCount;
@@ -114,6 +115,10 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
     @Override
     public int insert(VoteCount record) {
         record.setId(IdGenerator.getId());
+        List<VoteCount> voteCountList = this.selectAll(record);
+        if(voteCountList.size()>0){
+            throw new BizException("请勿重复投票");
+        }
         VoteDiv voteDiv = voteDivService.selectByPrimaryKey(record.getItemId());
         voteDiv.setVoteCount(voteDiv.getVoteCount()+1);
         voteDivService.updateByPrimaryKey(voteDiv);

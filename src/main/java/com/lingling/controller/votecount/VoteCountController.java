@@ -1,5 +1,6 @@
 package com.lingling.controller.votecount;
 
+import com.lingling.common.BizException;
 import com.lingling.controller.base.BaseController;
 import com.lingling.domin.votecount.VoteCount;
 import com.lingling.domin.votediv.VoteDivDTO;
@@ -25,10 +26,20 @@ public class VoteCountController extends BaseController{
     }
 
     //投票
-    @RequestMapping("voteCount/insert")
-    public int insert(VoteCount record,HttpSession httpSession){
-        record.setVoteUserId((String)httpSession.getAttribute("userId"));
-        return voteCountService.insert(record);
+    @RequestMapping("voteCount/vote")
+    public Result insert(VoteCount record,HttpSession httpSession){
+        Result result = new Result(false);
+        try {
+            record.setVoteUserId((String)httpSession.getAttribute("userId"));
+            voteCountService.insert(record);
+        }catch (BizException bizException){
+            result.setErrorMessage(bizException.getMessage());
+            return  result;
+        }
+        result.setSuccess(true);
+        result.setSuccessMessage("投票成功");
+        return result;
+
     }
 
     public VoteCount selectByPrimaryKey(String id){

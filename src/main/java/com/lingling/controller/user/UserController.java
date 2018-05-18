@@ -1,5 +1,6 @@
 package com.lingling.controller.user;
 
+import com.lingling.common.BizException;
 import com.lingling.controller.base.BaseController;
 import com.lingling.domin.user.User;
 import com.lingling.service.user.UserService;
@@ -35,6 +36,25 @@ public class UserController extends BaseController{
     //新增用户
     @RequestMapping("user/insert")
     public Result insert(User record,String verificationCode){
+        Result result = new Result(false);
+        try {
+            result = userService.insert(record,verificationCode);
+        }catch (BizException bizException){
+            result.setSuccess(false);
+            result.setErrorMessage(bizException.getMessage());
+            return result;
+        }
+        return result;
+
+    }
+    /*//更新用户
+    @RequestMapping("user/insert")
+    public Result insert(User record,String verificationCode){
+        Result result = userService.insert(record,verificationCode);
+        return result;
+    }*/
+    /*@RequestMapping("user/insert")
+    public Result insert(User record,String verificationCode){
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         Result result = new Result();
         result.setSuccess(false);
@@ -60,7 +80,7 @@ public class UserController extends BaseController{
             result.setSuccessMessage("新增成功！");
         }
         return result;
-    }
+    }*/
 
     //登录
     @RequestMapping("user/login")
@@ -92,6 +112,19 @@ public class UserController extends BaseController{
     @RequestMapping("user/updatePsw")
     public Result updatePsw(String newPsw,String oldPsw,HttpSession httpSession){
         return userService.updatePsw(newPsw,oldPsw,httpSession);
+    }
+
+    //更新用户密码
+    @RequestMapping("user/updatePswByVerificationCode")
+    public Result updatePswByVerificationCode(String newPsw,String verificationCode,String userCode){
+        Result result = null;
+        try {
+            result = userService.updatePswByVerificationCode(newPsw,verificationCode,userCode);
+        }catch (BizException bizException){
+            result.setErrorMessage(bizException.getMessage());
+            return result;
+        }
+        return result;
     }
 
     public int updateByPrimaryKey(User record,HttpSession httpSession){
