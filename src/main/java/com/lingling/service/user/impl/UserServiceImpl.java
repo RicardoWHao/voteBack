@@ -21,7 +21,6 @@ import java.util.List;
  * Created by Administrator on 2018/4/10.
  */
 @Service
-@Slf4j
 public class UserServiceImpl extends BaseService implements UserService{
 
     @Autowired
@@ -153,9 +152,9 @@ public class UserServiceImpl extends BaseService implements UserService{
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         Result result = new Result();
         result.setSuccess(false);
-        log.info("输入验证码："+verificationCode);
+        //log.info("输入验证码："+verificationCode);
 
-        log.info("服务器验证码："+operations.get(key));
+        //log.info("服务器验证码："+operations.get(key));
         if(verificationCode == null || verificationCode.equals("")){
             throw new BizException("验证码不能为空");
         }else if(operations.get(key) == null){

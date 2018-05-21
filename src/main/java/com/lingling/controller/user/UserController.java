@@ -22,7 +22,6 @@ import java.util.logging.Logger;
  * Created by Administrator on 2018/4/11.
  */
 @RestController
-@Slf4j
 public class UserController extends BaseController{
     @Autowired
     UserService userService;
@@ -95,7 +94,7 @@ public class UserController extends BaseController{
         try {
             httpSession.removeAttribute("userId");
         }catch (Exception e){
-            log.error(e.getMessage());
+            //log.error(e.getMessage());
         }
         result.setSuccess(true);
         return result;
