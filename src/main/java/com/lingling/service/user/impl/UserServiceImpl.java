@@ -158,7 +158,10 @@ public class UserServiceImpl extends BaseService implements UserService{
         log.info("服务器验证码："+operations.get(key));
         if(verificationCode == null || verificationCode.equals("")){
             throw new BizException("验证码不能为空");
-        }else if(!verificationCode.equals(operations.get(key).toString())){
+        }else if(operations.get(key) == null){
+            throw new BizException("验证码错误");
+        }
+        else if(!verificationCode.equals(operations.get(key).toString())){
             throw new BizException("验证码错误");
         }
     }

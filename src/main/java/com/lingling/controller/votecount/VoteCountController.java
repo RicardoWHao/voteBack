@@ -30,6 +30,9 @@ public class VoteCountController extends BaseController{
     public Result insert(VoteCount record,HttpSession httpSession){
         Result result = new Result(false);
         try {
+            if(httpSession.getAttribute("userId") == null){
+                throw new BizException("请先登录");
+            }
             record.setVoteUserId((String)httpSession.getAttribute("userId"));
             voteCountService.insert(record);
         }catch (BizException bizException){
