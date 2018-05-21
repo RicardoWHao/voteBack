@@ -8,7 +8,6 @@ import com.lingling.service.baseservice.BaseService;
 import com.lingling.service.user.UserService;
 import com.lingling.utils.IdGenerator;
 import com.lingling.utils.Result;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;

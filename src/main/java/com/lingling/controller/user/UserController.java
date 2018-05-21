@@ -6,7 +6,6 @@ import com.lingling.domin.user.User;
 import com.lingling.service.user.UserService;
 import com.lingling.utils.EmailHelper;
 import com.lingling.utils.Result;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
