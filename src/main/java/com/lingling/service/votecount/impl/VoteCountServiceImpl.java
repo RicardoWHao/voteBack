@@ -114,11 +114,11 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
     */
     @Override
     public int insert(VoteCount record) {
-        record.setId(IdGenerator.getId());
         List<VoteCount> voteCountList = this.selectAll(record);
         if(voteCountList.size()>0){
             throw new BizException("请勿重复投票");
         }
+        record.setId(IdGenerator.getId());
         VoteDiv voteDiv = voteDivService.selectByPrimaryKey(record.getItemId());
         voteDiv.setVoteCount(voteDiv.getVoteCount()+1);
         voteDivService.updateByPrimaryKey(voteDiv);
