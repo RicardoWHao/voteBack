@@ -61,6 +61,7 @@ public class UserServiceImpl extends BaseService implements UserService{
         if (httpSession.getAttribute("userId")!=null){
             id = (String) httpSession.getAttribute("userId");
             result.addDefaultModel(userDao.selectByPrimaryKey(id));
+            result.setSuccess(true);
         }
         return result;
     }
