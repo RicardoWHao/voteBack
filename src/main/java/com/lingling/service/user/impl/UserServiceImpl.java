@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Administrator on 2018/4/10.
@@ -24,6 +25,7 @@ public class UserServiceImpl extends BaseService implements UserService{
 
     @Autowired
     private UserDao userDao;
+    private static Logger logger = Logger.getLogger("UserServiceImpl.class");
 
     @Override
     public int deleteByPrimaryKey(String id) {
@@ -97,6 +99,7 @@ public class UserServiceImpl extends BaseService implements UserService{
         if (record.getPassword().equals(userList.get(0).getPassword())){
             result.setSuccess(true);
             httpSession.setAttribute("userId", userList.get(0).getId());
+            logger.info(httpSession.getAttribute("userId")+"登录成功");
             result.setSuccessMessage("登录成功");
         }else {
             result.setErrorMessage("密码错误");
