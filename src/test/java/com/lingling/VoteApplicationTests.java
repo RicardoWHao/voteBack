@@ -30,7 +30,7 @@ public class VoteApplicationTests {
 	public RedisTemplate redisTemplate;
 	@Test
 	public void test(){
-		List list = voteCountService.getUserByVoteId("1");
+		voteCountService.getUserByVoteId("1");
 		ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
 		operations.set("a","aa");
 		System.out.println(operations.get("a"));

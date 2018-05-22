@@ -47,9 +47,14 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
      * @return List<user>
      */
     @Override
-    public List getUserByVoteId(String voteId) {
+    public Result getUserByVoteId(String voteId) {
+        Result result = new Result(false);
         List voteCountList = voteCountDao.getUserIDByVoteId(voteId);
-        return userService.getUserList(voteCountList);
+        List userList = userService.getUserList(voteCountList);
+        result.setSuccess(true);
+        result.addDefaultModel("voteId",voteId);
+        result.addDefaultModel("userList",userList);
+        return result;
     }
 
     @Override

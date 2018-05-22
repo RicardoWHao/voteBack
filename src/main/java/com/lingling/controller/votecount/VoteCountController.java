@@ -58,7 +58,7 @@ public class VoteCountController extends BaseController{
 
     //根据投票项目id查询所有投过票的用户
     @RequestMapping("voteCount/getUserByVoteId")
-    public List getUserByVoteId(String voteId){
+    public Result getUserByVoteId(String voteId){
         return voteCountService.getUserByVoteId(voteId);
     }
 

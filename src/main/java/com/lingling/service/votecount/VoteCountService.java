@@ -20,7 +20,7 @@ public interface VoteCountService {
 
     int updateByPrimaryKey(VoteCount record);
 
-    List getUserByVoteId(String voteId);
+    Result getUserByVoteId(String voteId);
 
     List getVoteResult(String voteTopicId);
 
