@@ -9,8 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by wanghao on 2018/4/10.
- * email wanghaonepu@gamil.com
+ * Created by Administrator on 2018/4/10.
  */
 @Repository
 public class VoteDivDaoImpl implements VoteDivDao{

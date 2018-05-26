@@ -27,11 +27,12 @@ public class VoteDivController extends BaseController{
     public Result insert(VoteDiv record,HttpSession httpSession){
         return voteDivService.insert(record,httpSession);
     }
+    //根据id查询参赛作品明细
     @RequestMapping("votediv/selectById")
     public VoteDiv selectByPrimaryKey(String id){
         return voteDivService.selectByPrimaryKey(id);
     }
-    //根据id查询参赛作品明细
+    //查询全部参赛作品
     @RequestMapping("votediv/selectAll")
     public List<VoteDiv> selectAll(){
         return voteDivService.selectAll();

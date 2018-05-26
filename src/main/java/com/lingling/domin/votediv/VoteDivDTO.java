@@ -1,7 +1,8 @@
 package com.lingling.domin.votediv;
 
 /**
- * Created by WangHao on 2018/5/5.
+ * Created by Administrator on 2018/5/5.
+ * 数据传输对象
  */
 public class VoteDivDTO extends VoteDiv{
     private String userName;

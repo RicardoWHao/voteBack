@@ -42,7 +42,7 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
 
     /**
      * 根据参与投票选项id查询所有投当前选项的用户信息
-     * @author wanghao
+     * @author Administrator
      * @param voteId
      * @return List<user>
      */
@@ -114,7 +114,6 @@ public class VoteCountServiceImpl extends BaseService implements VoteCountServic
     }
 
     /*
-    *
     * 投票
     */
     @Override
