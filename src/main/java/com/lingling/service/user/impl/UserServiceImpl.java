@@ -109,13 +109,14 @@ public class UserServiceImpl extends BaseService implements UserService{
     }
 
 
-
+    //判断邮箱重复性业务逻辑代码
     @Override
     public List<User> selectUsersByQuery(User userQuery){
         List<User> list = null;
         list = userDao.selectUsersByQuery(userQuery);
         return list;
     }
+    //更新密码
     @Override
     public Result updatePsw(String newPsw, String oldPsw , HttpSession httpSession) {
 
@@ -135,7 +136,7 @@ public class UserServiceImpl extends BaseService implements UserService{
         }
         return result;
     }
-
+    //忘记密码：根据邮箱重新设置密码
     @Override
     public Result updatePswByVerificationCode(String newPsw, String verificationCode,String userCode) {
         Result result = new Result(false);

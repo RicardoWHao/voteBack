@@ -14,6 +14,11 @@ import java.util.List;
  */
 @Component("userDao")
 public class UserDaoImpl implements UserDao {
+    /**
+     * 当多个web线程调用同一个dao时，
+     * 它们使用的是同一个SqlSessionTemplate，
+     * 也就是同一个SqlSession
+     */
     @Resource(name="sqlSessionTemplate")
     private SqlSessionTemplate sqlSessionTemplate;
 

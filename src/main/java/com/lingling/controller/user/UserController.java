@@ -125,7 +125,7 @@ public class UserController extends BaseController{
         }
         return result;
     }
-
+    //更新用户信息
     public int updateByPrimaryKey(User record,HttpSession httpSession){
         Result result = new Result(false);
         if (httpSession.getAttribute("userId")==null){

@@ -90,6 +90,8 @@
       </foreach>
     </where>
   </select>
+  <!--用include标签引入sql片段，refid写定义sql片段的id-->
+  <!--验证邮箱重复性-->
   <select id="selectUsersByQuery" parameterType="com.lingling.domin.user.User" resultMap="BaseResultMap">
     select * from user
     <include refid="condition" />

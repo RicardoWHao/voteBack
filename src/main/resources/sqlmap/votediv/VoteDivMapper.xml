@@ -75,6 +75,7 @@
       </foreach>
     </where>
   </select>
+  <!--根据作品名进行模糊查询，搜索框对应的sql语句-->
   <select id="selectVoteDivByQuery" resultMap="BaseResultMap" parameterType="com.lingling.domin.votediv.VoteDiv" >
     select *
     from vote_div

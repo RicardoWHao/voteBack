@@ -9,27 +9,27 @@ import java.util.Set;
 public class Result implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * 鏄惁鎴愬姛
+     * 是否成功
      */
     private boolean success;
 
     /**
-     * service杩斿洖鐨勫璞�
+     * service返回的键值对?
      */
     private Map<String, Object> result = new HashMap<String, Object>();
 
     /**
-     * 榛樿鐨刱ey
+     * 默认的key
      */
     public static final String DEFAULT_MODEL_KEY = "value";
 
     /**
-     * 褰撳墠鐨刱ey
+     * 当前的key
      */
     private String modelKey = DEFAULT_MODEL_KEY;
 
     /**
-     * 杩斿洖鐮�
+     * 返回值?
      */
     private String resultCode;
     private String[] resultCodeParams;
@@ -37,7 +37,7 @@ public class Result implements Serializable {
     private String successMessage;
 
     /**
-     * 甯︽槸鍚︽垚鍔熺殑鏋勯�犳柟娉�
+     * 带是否成功的构造方法?
      *
      * @param success
      */
@@ -46,13 +46,13 @@ public class Result implements Serializable {
     }
 
     /**
-     * 榛樿鏋勯�犳柟娉�
+     * 默认构造方法?
      */
     public Result() {
     }
 
     /**
-     * 鏂板涓�涓繑鍥炵粨鏋�
+     * 新增多少个返回结果?
      *
      * @param obj
      * @return
@@ -62,7 +62,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 鏂板涓�涓甫key鐨勮繑鍥炵粨鏋�
+     * 新增多少个带key的返回结果?
      *
      * @param key
      * @param obj
@@ -74,7 +74,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 鍙栧嚭鎵�鏈夌殑key
+     * 取出�?有的key
      *
      * @return
      */
@@ -83,7 +83,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 鍙栧嚭鏁翠釜map瀵硅薄
+     * 取出整个map对象
      *
      * @return
      */
@@ -92,7 +92,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 鍙栧嚭榛樿鐨勫��
+     * 取出默认的对象
      *
      * @return
      */
@@ -101,7 +101,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 鍙栧嚭鍊�
+     * 取出�?
      *
      * @param key
      * @return
@@ -111,7 +111,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 鍙栧嚭鍊奸泦鍚�
+     * 取出值集�?
      *
      * @return
      */
@@ -121,7 +121,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 杩斿洖鏄惁鎴愬姛
+     * 返回是否成功
      *
      * @return
      */
@@ -130,7 +130,7 @@ public class Result implements Serializable {
     }
 
     /**
-     * 璁剧疆杩斿洖鏄惁鎴愬姛
+     * 设置返回是否成功
      *
      * @param success
      */
