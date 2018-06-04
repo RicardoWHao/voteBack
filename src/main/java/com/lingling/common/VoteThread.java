@@ -11,12 +11,7 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Author:wanghao
- * email:wanghao63@jd.com
- * Data:Created in 10:26 2018/5/21
- * Description:
- */
+
 public class VoteThread implements Runnable{
     //Jedis jedis = null;
     String key = "prdNum";// 商品主键
@@ -55,7 +50,7 @@ public class VoteThread implements Runnable{
                         break;
                     }
                 } else {
-                    System.out.println("悲剧了，库存为0，顾客:" + clientName + "用户投票失败");
+                    System.out.println("悲剧了，顾客:" + clientName + "用户投票失败");
                     continue;
                 }
             } catch (Exception e) {

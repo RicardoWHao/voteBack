@@ -135,7 +135,7 @@ public class UserController extends BaseController{
         }
         return userService.updateByPrimaryKey(record);
     }
-    //发送验证码
+    //发送验证码---使用Redis
     @RequestMapping("user/sendVerificationCode")
     public void sendVerificationCode(String userCode){
         ValueOperations<String, Integer> operations = redisTemplate.opsForValue();

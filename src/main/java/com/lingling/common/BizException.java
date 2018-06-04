@@ -2,7 +2,7 @@ package com.lingling.common;
 
 /**
  * 业务异常
- * Created by wanghao on 2018-5-18
+ * 
  */
 @SuppressWarnings("serial")
 public class BizException extends RuntimeException {

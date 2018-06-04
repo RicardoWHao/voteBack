@@ -4,6 +4,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * 在启动类添加配置信息，扫描controller注解，service注解，mapper注解
+ */
 @SpringBootApplication
 @MapperScan(value = "com.lingling.dao.testmapper")
 public class VoteApplication {
